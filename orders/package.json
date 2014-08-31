@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "canned": "~0.2.1"
+  },
+  "contributors": [ 
+    {
+      "name": "Tomasz Rogucki"
+    } 
+  ],
+  "scripts": {
+    "start": "node ./api.js"
+  }
+}

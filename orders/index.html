@@ -1,0 +1,48 @@
+<!doctype html>
+<html ng-app="ordersApp">
+    <head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	    
+	    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.js"></script>
+	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/src/markerclusterer.js" type="text/javascript"></script>
+	    <script src="controllers.js"></script>
+	    
+	    <link href="style.css" rel="stylesheet">
+    </head>
+    
+    <body ng-controller="OrdersListCtrl" ng-init="initMap">
+        <div id="main-wrapper">
+            <div id="orders-map">
+                <div id="map-canvas"></div>
+                <i class="map-left-shaddow"></i>
+            </div>
+            
+            <div id="orders-list">
+                <div id="orders-status">
+                    <div id="orders-total">
+                        Total: <b>{{orders.length}}</b>
+                    </div>
+                    
+                    <div id="orders-most-ordered">
+                        Most ordered: <b>{{mostOrdered}}</b>
+                    </div>
+                </div>
+                <div id="orders-scroll-wrapper">
+	                <div id="orders-scroll" when-scrolled="ordersScroll()">
+	                    <div class="orders-item" ng-class-odd="'orders-item-odd'" ng-class-even="'orders-item-even'" ng-click="showMarker($index)" ng-repeat="order in orders | limitTo : ordersDisplayLimit | orderBy : 'id'">
+	                        <div class="order-id">{{order.id}}</div>
+	                        <div class="order-name">{{order.name}}</div>
+	                        <div class="order-price">{{order.price}} €</div>
+	                    </div>
+	                </div>
+                </div>
+                
+                <div id="orders-scroll-hint" ng-show="showScrollHint">
+                    &darr; Scroll &darr;
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
